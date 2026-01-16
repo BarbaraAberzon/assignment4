@@ -1,0 +1,4 @@
+query: 1,family=Canidae;
+query: 2,genus=Canis;
+purchase: {"purchaser": "John Doe", "pet-type": "Golden Retriever"};
+purchase: {"purchaser": "Jane Smith", "pet-type": "bulldog", "store": 2};

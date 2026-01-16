@@ -1,0 +1,21 @@
+# Use a lightweight Python image
+FROM python:3.11-slim
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application code
+COPY app.py .
+
+# Make sure images directory exists
+RUN mkdir -p images
+
+# Expose the port used by the Flask app
+EXPOSE 5001
+
+# Run the application
+CMD ["python", "app.py"]
