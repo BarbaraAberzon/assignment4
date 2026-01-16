@@ -9,8 +9,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code
-#COPY app.py .
-COPY non_existent_file.py .
+COPY app.py .
 
 # Make sure images directory exists
 RUN mkdir -p images
