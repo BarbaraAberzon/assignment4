@@ -171,6 +171,8 @@ def setup_pets_store2(setup_store2_pet_types):
 
 class TestPetStoreAPI:
     """Test class for Pet Store API tests"""
+    def test_force_failure():
+        assert False, "Intentional failure to validate pipeline behavior"
 
     def test_post_pet_types_store1(self, setup_store1_pet_types):
         """Test 1-2: Verify pet-types were created in store #1 with unique IDs"""
