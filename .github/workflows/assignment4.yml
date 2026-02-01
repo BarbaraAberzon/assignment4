@@ -16,7 +16,7 @@ jobs:
       - name: Record start time
         run: |
           echo "$(date -Iminutes);" > log.txt
-          echo "Barbara Aberzon;" >> log.txt
+          echo "Barbara Aberzon, Amit Dahan;" >> log.txt
 
       - name: Build pet-store image
         id: build_pet_store
