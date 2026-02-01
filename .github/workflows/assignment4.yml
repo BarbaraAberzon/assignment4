@@ -221,6 +221,7 @@ jobs:
         id: pytest
         continue-on-error: true
         run: |
+          set -o pipefail
           cd tests
           pytest -v assn4_tests.py | tee assn4_test_results.txt
 
