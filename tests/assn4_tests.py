@@ -15,7 +15,7 @@ PET_TYPE4 = {"type": "bulldog"}
 # Expected values for pet types
 PET_TYPE1_VAL = {
     "type": "Golden Retriever",
-    "family": "WRONG_FAMILY",
+    "family": "Canidae",
     "genus": "Canis",
     "attributes": [],
     "lifespan": 12
