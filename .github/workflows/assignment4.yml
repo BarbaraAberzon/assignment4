@@ -375,6 +375,52 @@ jobs:
       - name: Install requests
         run: pip install requests
 
+      - name: Populate stores with data
+        run: |
+          python3 << 'EOF'
+          import requests
+
+          PET_STORE_1_URL = "http://localhost:5001"
+          PET_STORE_2_URL = "http://localhost:5002"
+
+          HEADERS = {"Content-Type": "application/json"}
+
+          # POST 3 pet-types to store 1
+          PET_TYPE1 = {"type": "Golden Retriever"}
+          PET_TYPE2 = {"type": "Australian Shepherd"}
+          PET_TYPE3 = {"type": "Abyssinian"}
+
+          r1 = requests.post(f"{PET_STORE_1_URL}/pet-types", json=PET_TYPE1, headers=HEADERS)
+          id_1 = r1.json()["id"]
+          r2 = requests.post(f"{PET_STORE_1_URL}/pet-types", json=PET_TYPE2, headers=HEADERS)
+          id_2 = r2.json()["id"]
+          r3 = requests.post(f"{PET_STORE_1_URL}/pet-types", json=PET_TYPE3, headers=HEADERS)
+          id_3 = r3.json()["id"]
+
+          # POST 3 pet-types to store 2
+          PET_TYPE4 = {"type": "bulldog"}
+          r4 = requests.post(f"{PET_STORE_2_URL}/pet-types", json=PET_TYPE1, headers=HEADERS)
+          id_4 = r4.json()["id"]
+          r5 = requests.post(f"{PET_STORE_2_URL}/pet-types", json=PET_TYPE2, headers=HEADERS)
+          id_5 = r5.json()["id"]
+          r6 = requests.post(f"{PET_STORE_2_URL}/pet-types", json=PET_TYPE4, headers=HEADERS)
+          id_6 = r6.json()["id"]
+
+          # POST pets to store 1
+          requests.post(f"{PET_STORE_1_URL}/pet-types/{id_1}/pets", json={"name": "Lander", "birthdate": "14-05-2020"}, headers=HEADERS)
+          requests.post(f"{PET_STORE_1_URL}/pet-types/{id_1}/pets", json={"name": "Lanky"}, headers=HEADERS)
+          requests.post(f"{PET_STORE_1_URL}/pet-types/{id_3}/pets", json={"name": "Muscles"}, headers=HEADERS)
+          requests.post(f"{PET_STORE_1_URL}/pet-types/{id_3}/pets", json={"name": "Junior"}, headers=HEADERS)
+
+          # POST pets to store 2
+          requests.post(f"{PET_STORE_2_URL}/pet-types/{id_4}/pets", json={"name": "Shelly", "birthdate": "07-07-2019"}, headers=HEADERS)
+          requests.post(f"{PET_STORE_2_URL}/pet-types/{id_5}/pets", json={"name": "Felicity", "birthdate": "27-11-2011"}, headers=HEADERS)
+          requests.post(f"{PET_STORE_2_URL}/pet-types/{id_6}/pets", json={"name": "Lazy", "birthdate": "07-08-2018"}, headers=HEADERS)
+          requests.post(f"{PET_STORE_2_URL}/pet-types/{id_6}/pets", json={"name": "Lemon", "birthdate": "27-03-2020"}, headers=HEADERS)
+
+          print("Stores populated successfully")
+          EOF
+
       - name: Process queries from query.txt
         run: |
           python3 << 'EOF'
