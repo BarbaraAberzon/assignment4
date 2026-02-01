@@ -1,0 +1,2 @@
+query: 1, type=goldfish;
+query: 2, type=goldfish
